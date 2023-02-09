@@ -5,8 +5,7 @@ import Sidebar from "./Sidebar";
 import WebPlayer from "./WebPlayer";
 
 const CLIENT_ID = process.env.NEXT_PUBLIC_CLIENT_ID;
-const REDIRECT_URI =
-	process.env.NEXT_PUBLIC_REDIRECT_URI || "http://localhost:3000";
+const REDIRECT_URI = window.location.href || "http://localhost:3000";
 const AUTH_ENDPOINT = "https://accounts.spotify.com/authorize";
 const RESPONSE_TYPE = "token";
 const SCOPES = [
