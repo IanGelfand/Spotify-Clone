@@ -4,29 +4,31 @@ import { getRecentlyPlayed, logout } from "../../spotify";
 import Sidebar from "./Sidebar";
 import WebPlayer from "./WebPlayer";
 
+const CLIENT_ID = process.env.NEXT_PUBLIC_CLIENT_ID;
+const REDIRECT_URI =
+	process.env.NEXT_PUBLIC_REDIRECT_URI || "http://localhost:3000";
+const AUTH_ENDPOINT = "https://accounts.spotify.com/authorize";
+const RESPONSE_TYPE = "token";
+const SCOPES = [
+	"user-read-private",
+	"user-read-email",
+	"user-read-playback-state",
+	"user-modify-playback-state",
+	"user-read-currently-playing",
+	"user-top-read",
+	"user-read-recently-played",
+	"user-library-read",
+	"user-library-modify",
+	"playlist-read-private",
+	"playlist-read-collaborative",
+	"playlist-modify-public",
+	"playlist-modify-private",
+	"user-follow-read",
+	"user-follow-modify",
+	"streaming",
+];
+
 function Layout({ children }: any) {
-	const CLIENT_ID = process.env.NEXT_PUBLIC_CLIENT_ID;
-	const REDIRECT_URI = window.location.href || "http://localhost:3000";
-	const AUTH_ENDPOINT = "https://accounts.spotify.com/authorize";
-	const RESPONSE_TYPE = "token";
-	const SCOPES = [
-		"user-read-private",
-		"user-read-email",
-		"user-read-playback-state",
-		"user-modify-playback-state",
-		"user-read-currently-playing",
-		"user-top-read",
-		"user-read-recently-played",
-		"user-library-read",
-		"user-library-modify",
-		"playlist-read-private",
-		"playlist-read-collaborative",
-		"playlist-modify-public",
-		"playlist-modify-private",
-		"user-follow-read",
-		"user-follow-modify",
-		"streaming",
-	];
 	const [currentSong, setCurrentSong]: any = useState([]);
 	const [token, setToken] = useState("");
 	useEffect(() => {
